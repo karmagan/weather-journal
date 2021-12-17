@@ -5,7 +5,7 @@ const myKey = "&appid=2f7719a84afb59c77dda0bc36089b05a&units=imperial";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+let newDate = (d.getMonth()+1) + "." + d.getDate() + "." + d.getFullYear();
 
 /* Function to POST data */
 const postData = async (url = "", data = {}) => {
