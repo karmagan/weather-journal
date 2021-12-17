@@ -1,7 +1,7 @@
 /* Global Variables */
 
 const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
-const myKey = "&appid=2f7719a84afb59c77dda0bc36089b05a";
+const myKey = "&appid=2f7719a84afb59c77dda0bc36089b05a&units=imperial";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -20,14 +20,12 @@ const postData = async (url = "", data = {}) => {
 
   try {
     const newData = await response.json();
-    // return newData;
   } catch (error) {
     console.log("error", error);
-    // appropriately handle the error
   }
 };
 
-
+// Retrieve data from openweathermap
 const retrieveData = async (url = "") => {
   const request = await fetch(url);
   try {
@@ -38,11 +36,11 @@ const retrieveData = async (url = "") => {
   }
 };
 
+// Retrieve data from server
 const updateUI = async () => {
   const request = await fetch("/all");
   try {
     const allData = await request.json();
-    console.log(allData)
     document.getElementById("date").innerHTML = allData.date;
     document.getElementById("temp").innerHTML = allData.temperature;
     document.getElementById("content").innerHTML = allData.userResponse;
@@ -51,6 +49,7 @@ const updateUI = async () => {
   }
 };
 
+// Chaining promises
 const perform = () => {
   const zip = document.getElementById("zip").value;
   retrieveData(baseURL + zip + myKey)
@@ -63,5 +62,5 @@ const perform = () => {
     })
     
 };
-// TODO-Call the chained function
+// Call the chained function
 document.getElementById("generate").addEventListener("click", perform);
